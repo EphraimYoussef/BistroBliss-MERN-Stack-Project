@@ -4,8 +4,8 @@ import { Twitter, Facebook, Instagram, Github } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-[#474747] text-white py-16 min-h-screen">
-      <div className="container mx-auto px-4 flex flex-col justify-around h-full">
+    <footer className="bg-[#474747] text-white py-16 ">
+      <div className="container mx-auto px-4 flex flex-col justify-between">
         <div className="flex flex-wrap justify-between gap-1">
           {/* Logo and Description */}
           <div className="w-full lg:w-1/4 mb-8 lg:mb-0">
