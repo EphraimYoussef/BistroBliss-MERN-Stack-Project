@@ -13,19 +13,19 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="w-full">
+    <nav className="w-full sticky top-0 z-50">
       {/* Top bar - visible on all screens */}
-      <div className="bg-gray-800 text-white py-2 px-4 flex flex-col sm:flex-row justify-between items-center ">
+      <div className="bg-[#474747] text-white py-2 px-4 flex flex-col sm:flex-row justify-between items-center ">
 				<div className='container mx-auto flex flex-col sm:flex-row justify-between items-center '>
 					<div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-2 sm:mb-0 ">
 						<span className="flex items-center"><Phone size={16} className="mr-2" /> (414) 857 - 0107</span>
 						<span className="flex items-center"><Mail size={16} className="mr-2" /> yummy@bistrobliss</span>
 					</div>
 					<div className="flex items-center space-x-4 ">
-						<button className='text-white rounded-full bg-slate-700 p-2'> <FaFacebookF size={14} className="cursor-pointer hover:text-gray-300" /></button>
-						<button className='text-white rounded-full bg-slate-700 p-2'> <FaTwitter size={14} className="cursor-pointer hover:text-gray-300" /></button>
-						<button className='text-white rounded-full bg-slate-700 p-2'> <FaInstagram size={14} className="cursor-pointer hover:text-gray-300" /></button>
-						<button className='text-white rounded-full bg-slate-700 p-2'> <FaGithub size={14} className="cursor-pointer hover:text-gray-300" /></button>
+						<button className='text-white rounded-full bg-[#383838] p-2'> <FaFacebookF size={14} className="cursor-pointer hover:text-gray-300" /></button>
+						<button className='text-white rounded-full bg-[#383838] p-2'> <FaTwitter size={14} className="cursor-pointer hover:text-gray-300" /></button>
+						<button className='text-white rounded-full bg-[#383838] p-2'> <FaInstagram size={14} className="cursor-pointer hover:text-gray-300" /></button>
+						<button className='text-white rounded-full bg-[#383838] p-2'> <FaGithub size={14} className="cursor-pointer hover:text-gray-300" /></button>
 					</div>
 				</div>
         
