@@ -27,7 +27,7 @@ const cardsData = [
 const BrowseMenu = () => {
 	return (
 		<div className='container mx-auto px-4 py-28 flex flex-col items-center gap-10'>
-			<p className='text-3xl font-bold'>Browse Our Menu</p>
+			<img src="/BrowseMenu/Browse Our Menu.svg" alt="" />
 			<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8'>
 				{
 					cardsData.map((data, index) => {
