@@ -40,10 +40,10 @@ export default function Navbar() {
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-6">
             <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
-            <Link href="/about" className="text-gray-600 hover:text-gray-800">About</Link>
+            <Link href="/about" className="text-gray-600 hover:text-gray-800">About us</Link>
             <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
             <Link href="/pages" className="text-gray-600 hover:text-gray-800">Pages</Link>
-            <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact</Link>
+            <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact us</Link>
             <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300">
               Book A Table
             </button>
@@ -53,26 +53,29 @@ export default function Navbar() {
           <button className="md:hidden" onClick={toggleMenu}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+
         </div>
+
+        {/* Mobile menu */}
+        <div 
+          className={`md:hidden bg-white shadow-md overflow-hidden transition-all duration-300 ease-in-out ${
+            isMenuOpen ? 'max-h-96' : 'max-h-0'
+          }`}
+        >
+          <div className="flex flex-col space-y-4 px-6 py-4">
+            <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
+            <Link href="/about" className="text-gray-600 hover:text-gray-800">About us</Link>
+            <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
+            <Link href="/pages" className="text-gray-600 hover:text-gray-800">Pages</Link>
+            <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact us</Link>
+            <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300 w-full">
+              Book A Table
+            </button>
+          </div>
+        </div>
+
       </div>
 
-      {/* Mobile menu */}
-      <div 
-        className={`md:hidden bg-white shadow-md overflow-hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'max-h-96' : 'max-h-0'
-        }`}
-      >
-        <div className="flex flex-col space-y-4 px-6 py-4">
-          <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
-          <Link href="/about" className="text-gray-600 hover:text-gray-800">About</Link>
-          <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
-          <Link href="/pages" className="text-gray-600 hover:text-gray-800">Pages</Link>
-          <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact</Link>
-          <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300 w-full">
-            Book A Table
-          </button>
-        </div>
-      </div>
     </>
   )
 }
