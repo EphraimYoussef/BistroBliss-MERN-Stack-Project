@@ -1,9 +1,16 @@
+import AboutHeader from '@/components/pages/about us/AboutHeader'
+import Details from '@/components/pages/about us/Details'
+import Features from '@/components/pages/about us/Features'
+import Testimonials from '@/components/pages/about us/Testimonials'
 import React from 'react'
 
 const page = () => {
   return (
-    <div className='text-6xl font-bold min-h-screen flex justify-center items-center'>
-			About Us
+    <div>
+			<AboutHeader />
+      <Features />
+      <Details />
+      <Testimonials />
 		</div>
   )
 }
