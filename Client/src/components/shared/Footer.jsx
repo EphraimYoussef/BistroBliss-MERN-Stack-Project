@@ -71,10 +71,10 @@ export default function Footer() {
           <div className="w-full lg:w-1/3 flex flex-col items-start">
             <h3 className="text-lg font-semibold mb-4 ">Follow Us On Instagram</h3>
             <div className="grid grid-cols-2 gap-4">
-              <Image src="/footerPic1.jpg" alt="Instagram post 1" width={200} height={200} className="rounded-lg" />
-              <Image src="/footerPic2.jpg" alt="Instagram post 2" width={200} height={200} className="rounded-lg" />
-              <Image src="/footerPic3.jpg" alt="Instagram post 3" width={200} height={200} className="rounded-lg" />
-              <Image src="/footerPic4.jpg" alt="Instagram post 4" width={200} height={200} className="rounded-lg" />
+              <Image src="/footer/footerPic1.jpg" alt="Instagram post 1" width={200} height={200} className="rounded-lg" />
+              <Image src="/footer/footerPic2.jpg" alt="Instagram post 2" width={200} height={200} className="rounded-lg" />
+              <Image src="/footer/footerPic3.jpg" alt="Instagram post 3" width={200} height={200} className="rounded-lg" />
+              <Image src="/footer/footerPic4.jpg" alt="Instagram post 4" width={200} height={200} className="rounded-lg" />
             </div>
           </div>
         </div>
