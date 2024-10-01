@@ -7,7 +7,7 @@ const Header = () => {
 			<div className='flex flex-col justify-center items-center gap-5'>
 				<img src="/header/text.svg" alt="" />
 				<div className='flex justify-around items-center w-2/3'>
-					<Button className="rounded-full w-40 h-14 text-white text-base">Book A Table</Button>
+					<Button className="rounded-full w-40 h-14 text-white text-base hover:bg-primary-dark">Book A Table</Button>
 					<Button variant='outline' className="rounded-full w-40 h-14 text-base">Explore Menu</Button>
 				</div>
 			</div>
