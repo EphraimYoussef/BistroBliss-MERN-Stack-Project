@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Twitter, Facebook, Instagram, Github } from 'lucide-react'
+import { FaFacebookF, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -16,17 +16,17 @@ export default function Footer() {
               In the new era of technology we look a in the future with certainty and pride to for our company and.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="bg-[#AD343E] p-2 rounded-full hover:bg-[#952d36] duration-300">
-                <Twitter className="w-5 h-5" />
+              <Link href="#" className="bg-primary p-2 rounded-full hover:bg-primary-dark duration-300">
+                <FaTwitter className="w-5 h-5" />
               </Link>
-              <Link href="#" className="bg-[#AD343E] p-2 rounded-full hover:bg-[#952d36] duration-300">
-                <Facebook className="w-5 h-5" />
+              <Link href="#" className="bg-primary p-2 rounded-full hover:bg-primary-dark duration-300">
+                <FaFacebookF className="w-5 h-5" />
               </Link>
-              <Link href="#" className="bg-[#AD343E] p-2 rounded-full hover:bg-[#952d36] duration-300">
-                <Instagram className="w-5 h-5" />
+              <Link href="#" className="bg-primary p-2 rounded-full hover:bg-primary-dark duration-300">
+                <FaInstagram className="w-5 h-5" />
               </Link>
-              <Link href="#" className="bg-[#AD343E] p-2 rounded-full hover:bg-[#952d36] duration-300">
-                <Github className="w-5 h-5" />
+              <Link href="#" className="bg-primary p-2 rounded-full hover:bg-primary-dark duration-300">
+                <FaGithub className="w-5 h-5" />
               </Link>
             </div>
           </div>
