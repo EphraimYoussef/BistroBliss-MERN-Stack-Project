@@ -1,12 +1,13 @@
 import BrowseMenu from "@/components/pages/home/BrowseMenu";
 import Header from "@/components/pages/home/Header";
-import Image from "next/image";
+import MoreInfo from "@/components/pages/home/MoreInfo";
 
 export default function Home() {
   return (
     <main>
       <Header />
       <BrowseMenu />
+      <MoreInfo />
     </main>
   );
 }
