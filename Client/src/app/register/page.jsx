@@ -1,10 +1,16 @@
+import RegisterForm from '@/components/pages/register/RegisterForm'
 import React from 'react'
+
+export const metadata = {
+	title:'Register',
+	description:'Register to Bistro Bliss restaurant',
+}
 
 const page = () => {
 	return (
-		<div className='container mx-auto flex min-h-screen justify-center items-center'>
-			<h1 className='text-3xl font-bold'>Register</h1>
-		</div>
+		<main>
+			<RegisterForm />
+		</main>
 	)
 }
 
