@@ -1,10 +1,16 @@
+import LoginForm from '@/components/pages/login/LoginForm'
 import React from 'react'
+
+export const metadata = {
+	title:'Login',
+	description:'Login to Bistro Bliss restaurant',
+}
 
 const page = () => {
 	return (
-		<div className='container mx-auto flex min-h-screen justify-center items-center'>
-			<h1 className='text-3xl font-bold'>Login</h1>
-		</div>
+		<main>
+			<LoginForm />
+		</main>
 	)
 }
 
