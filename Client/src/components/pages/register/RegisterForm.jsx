@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 export default function LoginForm() {
   const [name, setName] = useState('')
@@ -24,7 +25,7 @@ export default function LoginForm() {
             <label htmlFor="name" className="block text-base font-medium text-gray-700">
               Name
             </label>
-            <input
+            <Input
               type="text"
               id="Name"
               placeholder="Enter your name"
