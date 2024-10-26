@@ -49,7 +49,6 @@ export default function Navbar() {
             <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
             <Link href="/about" className="text-gray-600 hover:text-gray-800">About us</Link>
             <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
-            <Link href="/pages" className="text-gray-600 hover:text-gray-800">Pages</Link>
             <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact us</Link>
             <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300">
               Book A Table
@@ -105,7 +104,6 @@ export default function Navbar() {
             <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
             <Link href="/about" className="text-gray-600 hover:text-gray-800">About us</Link>
             <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
-            <Link href="/pages" className="text-gray-600 hover:text-gray-800">Pages</Link>
             <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact us</Link>
             <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300 w-full">
               Book A Table
