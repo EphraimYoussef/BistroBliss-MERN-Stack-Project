@@ -5,7 +5,7 @@ const mealSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	descriptiion: {
+	description: {
 		type: String,
 		required: true
 	},

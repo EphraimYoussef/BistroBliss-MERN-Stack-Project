@@ -14,11 +14,11 @@ const bookingSchema = new mongoose.Schema({
 		required: true
 	},
 	date: {
-		type: String,
+		type: Date,
 		required: true
 	},
 	time: {
-		type: String,
+		type: Timestamp,
 		required: true
 	},
 	capacity: {
@@ -26,14 +26,16 @@ const bookingSchema = new mongoose.Schema({
 		enum: ["1", "2","3", "4", "+5" ],
 		required: true  
 	},
-	tableNumber: {
-		type: String,
-	},
 	status: {
 		type: String,
 		enum: ["pending", "rejected", "accepted"],
 		default: "pending"
 	},
+	userId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
+		required: true
+	}
 });
 
 module.exports = mongoose.model('Booking', bookingSchema);
