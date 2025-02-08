@@ -18,7 +18,7 @@ const bookingSchema = new mongoose.Schema({
 		required: true
 	},
 	time: {
-		type: Timestamp,
+		type: String,
 		required: true
 	},
 	capacity: {
