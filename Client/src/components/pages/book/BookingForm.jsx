@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { CalendarIcon, ClockIcon, ChevronDownIcon } from 'lucide-react'
 import { format } from "date-fns"
 import InputMask from "react-input-mask"
+import { IMaskInput } from "react-imask";
 import { Calendar } from "@/components/ui/calendar"
 import {
   Popover,
@@ -19,17 +20,17 @@ export default function BookingForm() {
   const [phone, setPhone] = useState('')
   const [totalPerson, setTotalPerson] = useState('1 Person')
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission here
-    console.log({ date, time, name, phone, totalPerson })
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   // Handle form submission here
+  //   console.log({ date, time, name, phone, totalPerson })
+  // }
 
   return (
     <div className='bg-[#F9F9F7] min-h-screen flex flex-col justify-around items-center'>
       <img src="book/title.svg" alt="" className='p-5'/>
       <div className="w-full max-w-2xl mx-auto p-10 m-10 bg-white rounded-xl shadow-lg">
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form  className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="date" className="block text-sm font-medium text-gray-700">
@@ -91,14 +92,14 @@ export default function BookingForm() {
                 Phone
               </label>
               <div className="relative">
-                <InputMask
-                  mask="9999 999 9999"
-                  type="tel"
-                  id="phone"
-                  placeholder="0123 456 7890"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                <IMaskInput
+                  type = 'tel'
+                  mask = "0000 000 0000"
+                  id='phone'
+                  value = {phone}
+                  onChange = {(e) => setPhone(e.target.value)}
+                  placeholder = "0123 456 7890"
+                  className = "w-full px-4 py-2 border border-gray-300 rounded-full "
                 />
               </div>
             </div>
