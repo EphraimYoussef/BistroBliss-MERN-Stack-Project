@@ -17,7 +17,7 @@ const MyBookings = () => {
               <div className="space-y-4">
                 <BookingItem 
                 name="EVRA" 
-                date="MArch 15, 2025" 
+                date="March 15, 2025" 
                 time="8:00 PM"
                 totalPerson="5+"
                 phone="+201551220618"

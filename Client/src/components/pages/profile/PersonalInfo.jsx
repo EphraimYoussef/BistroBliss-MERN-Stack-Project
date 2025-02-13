@@ -12,10 +12,11 @@ const PersonalInfo = () => {
 	const [username, setUsername] = useState("JohnDoe")
 	const [email, setEmail] = useState("john.doe@example.com")
 	const [password, setPassword] = useState("")
+	const [confirmPassword, setConfirmPassword] = useState("")
 
 	const handleSave = () => {
 		// Implement save functionality here
-		console.log("Saving profile information:", { username, email, password })
+		console.log("Saving profile information:", { username, email, password , confirmPassword})
 	}
 
 	return(
@@ -36,13 +37,23 @@ const PersonalInfo = () => {
 						<Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 					</div>
 					<div className="space-y-2">
-						<Label htmlFor="password">Password</Label>
+						<Label htmlFor="password">New password</Label>
 						<Input
 							id="password"
 							type="password"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							placeholder="Enter new password"
+							placeholder="Enter your new password"
+						/>
+					</div>
+					<div className="space-y-2">
+						<Label htmlFor="password">Confirm new password</Label>
+						<Input
+							id="password"
+							type="password"
+							value={confirmPassword}
+							onChange={(e) => setConfirmPassword(e.target.value)}
+							placeholder="Confirm your new password"
 						/>
 					</div>
 					<Button onClick={handleSave} className="w-full text-white">
