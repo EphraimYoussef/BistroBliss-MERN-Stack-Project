@@ -14,10 +14,11 @@ export default function LoginForm() {
   }
 
   return (
-    <div className='bg-[#F9F9F7] min-h-screen flex flex-col justify-around items-center'>
+    <div className='bg-[#F9F9F7] min-h-screen flex flex-col justify-around items-center p-6'>
       <img src="Login.svg" alt="" className='p-5'/>
       <div className="w-full max-w-2xl mx-auto p-10 m-10 bg-white rounded-xl shadow-lg">
-        <form onSubmit={handleSubmit} className="space-y-6 flex flex-col gap-5">
+        <form onSubmit={handleSubmit} className="space-y-3 flex flex-col gap-5">
+          
           <div className="space-y-2">
             <label htmlFor="name" className="block text-base font-medium text-gray-700">
               Email
@@ -31,6 +32,7 @@ export default function LoginForm() {
               className="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
+
           <div className="space-y-2">
             <label htmlFor="name" className="block text-base font-medium text-gray-700">
               Password
@@ -44,12 +46,14 @@ export default function LoginForm() {
               className="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
+
           <Button
             type="submit"
             className="w-full px-4 py-3 font-semibold rounded-full text-white"
           >
             Login
           </Button>
+
         </form>
       </div>
     </div>
