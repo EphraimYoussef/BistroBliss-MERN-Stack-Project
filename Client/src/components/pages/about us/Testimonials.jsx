@@ -30,7 +30,7 @@ console.log( "testimonialsData :", testimonialsData);
 
 const Testimonials = () => {
 	return (
-		<section className='flex flex-col items-center p-10 '>
+		<section className='flex flex-col items-center p-10 max-md:p-3'>
 			<img src="/about/testimonials/title.svg" alt="" />
 			<div className='container mx-auto grid grid-cols-1 xl:grid-cols-3 gap-8 py-14'>
 				{
