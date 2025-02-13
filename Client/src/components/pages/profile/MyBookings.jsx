@@ -17,12 +17,28 @@ const MyBookings = () => {
               <div className="space-y-4">
                 <BookingItem 
                 name="EVRA" 
-                date="February 15, 2025" 
+                date="MArch 15, 2025" 
                 time="8:00 PM"
-                totalPerson="2"
+                totalPerson="5+"
                 phone="+201551220618"
                 email="evra@gmail.com"
                 status="Accepted" />
+                <BookingItem 
+                name="EVRA" 
+                date="May 15, 2025" 
+                time="5:00 PM"
+                totalPerson="1"
+                phone="+201551220618"
+                email="evra@gmail.com"
+                status="Rejected" />
+                <BookingItem 
+                name="EVRA" 
+                date="June 15, 2025" 
+                time="3:00 PM"
+                totalPerson="3"
+                phone="+201551220618"
+                email="evra@gmail.com"
+                status="Pending" />
               </div>
             </CardContent>
           </Card>
