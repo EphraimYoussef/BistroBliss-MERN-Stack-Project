@@ -9,7 +9,7 @@ const playFairDisplay_Font = Playfair_Display({ subsets: ['latin'] })
 export default function ProfilePage() {
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-semibold mb-4">
+      <h1 className="text-4xl font-semibold mb-4 text-center">
         <span className = { playFairDisplay_Font.className }>My Profile</span>
       </h1>
 
