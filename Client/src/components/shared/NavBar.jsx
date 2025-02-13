@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import { Phone, Mail, Menu, X, ChevronDown } from 'lucide-react'
 import { FaFacebookF, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa"
-// import { FiPhone } from "react-icons/fi";
 
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
@@ -51,11 +50,11 @@ export default function Navbar() {
       <div className='bg-white shadow-md sticky -top-1 z-50'>
         <div className="py-4 px-6 flex justify-between items-center container mx-auto">
           <Link href="/" className="flex items-center">
-            <img src="/Logo.svg" alt="Bistro Bliss Logo" className="h-14 w-52 mr-2" />
+            <img src="/Logo.svg" alt="Bistro Bliss Logo" className="h-14 w-52 mr-2 max-md:h-12 max-md:w-36" />
           </Link>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-6">
             <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
             <Link href="/about" className="text-gray-600 hover:text-gray-800">About us</Link>
             <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
@@ -81,7 +80,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-4">
+          <div className="lg:hidden flex items-center space-x-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className="flex items-center">
@@ -106,7 +105,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         <div 
-          className={`md:hidden bg-white shadow-md overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`lg:hidden bg-white shadow-md overflow-hidden transition-all duration-300 ease-in-out ${
             isMenuOpen ? 'max-h-96' : 'max-h-0'
           }`}
         >
