@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import { Phone, Mail, Menu, X, ChevronDown } from 'lucide-react'
 import { FaFacebookF, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa"
+// import { FiPhone } from "react-icons/fi";
+
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import {
@@ -24,10 +26,18 @@ export default function Navbar() {
       {/* Top bar - not sticky */}
       <div className="bg-[#474747] text-white py-2 px-4">
         <div className='container mx-auto flex flex-col sm:flex-row justify-between items-center'>
+
           <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-2 sm:mb-0">
-            <span className="flex items-center"><Phone size={16} className="mr-2" /> (414) 857 - 0107</span>
-            <span className="flex items-center"><Mail size={16} className="mr-2" /> yummy@bistrobliss</span>
+            <span className="flex items-center">
+              <Phone size={16} className="mr-2" /> 
+              <span>(414) 857 - 0107</span>
+            </span>
+            <span className="flex items-center">
+              <Mail size={16} className="mr-2" /> 
+              <span>yummy@bistrobliss</span>
+            </span>
           </div>
+
           <div className="flex items-center space-x-4">
             <button className='text-white rounded-full bg-[#383838] p-2'> <FaFacebookF size={14} className="cursor-pointer hover:text-gray-300" /></button>
             <button className='text-white rounded-full bg-[#383838] p-2'> <FaTwitter size={14} className="cursor-pointer hover:text-gray-300" /></button>
