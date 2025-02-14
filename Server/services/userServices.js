@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('../config/config');
 const userRepo = require('../repos/userRepo');
-// const UnauthorizedError = require('../Errors/UnauthorizedError');
 const bookingService = require('./bookingServices');
 const mealService = require('./mealServices');
 
@@ -41,7 +40,7 @@ const login = async (email, password) => {
         }
         
         const token = jwt.sign({ _id: foundUser._id }, config.jwt.secret, { expiresIn: config.jwt.expiration });
-        return token;
+        return {token, user: foundUser};
     } catch (error) {
         throw new Error(error.message);
     }
