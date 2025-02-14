@@ -25,9 +25,6 @@ const testimonialsData = [
 	},
 ]
 
-console.log( "testimonialsData :", testimonialsData);
-
-
 const Testimonials = () => {
 	return (
 		<section className='flex flex-col items-center p-10 max-md:p-3'>

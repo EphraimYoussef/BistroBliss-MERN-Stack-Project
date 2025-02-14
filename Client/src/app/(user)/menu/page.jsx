@@ -1,8 +1,11 @@
-import MealCard from '@/atoms/MealCard'
 import MenuFilter from '@/components/pages/Menu/MenuFilter'
 import MenuHeader from '@/components/pages/Menu/MenuHeader'
 import MenuMeals from '@/components/pages/Menu/MenuMeals'
 import React from 'react'
+
+export const metadata = {
+	title:"Menu",
+}
 
 const page = () => {
 	return (
