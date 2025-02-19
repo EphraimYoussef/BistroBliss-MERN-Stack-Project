@@ -1,6 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { Playfair_Display } from "next/font/google"
+
+
+const playFairDisplay_Font = Playfair_Display({
+  subsets: ['latin'],
+  style: 'italic',
+})
 
 export default function Users() {
   const [users, setUsers] = useState([])
@@ -17,7 +24,9 @@ export default function Users() {
   return (
     <div className="bg-white shadow overflow-hidden rounded-lg w-full">
       <div className="px-4 py-5 sm:px-6 bg-[#F9F9F7]">
-        <h3 className="text-lg leading-6 font-medium text-gray-900"> Users </h3>
+        <h3 className="text-lg leading-6 font-medium text-gray-900 font-semibold">
+          <span className={playFairDisplay_Font.className} >Users</span>
+        </h3>
       </div>
       <div className="border-t border-gray-200">
         <ul className="divide-y divide-gray-200">
