@@ -1,9 +1,10 @@
+import Meals from '@/components/pages/admin/Meals'
 import React from 'react'
 
 const page = () => {
   return (
-    <div className='min-h-screen flex justify-center items-center bg-[#F9F9F7]'>
-      <h1>Meals</h1>
+    <div className='min-h-screen flex justify-center items-center px-5 pb-20 pt-5'>
+      <Meals />
     </div>
   )
 }
