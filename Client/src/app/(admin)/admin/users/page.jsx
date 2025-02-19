@@ -1,9 +1,10 @@
+import Users from '@/components/pages/admin/Users'
 import React from 'react'
 
 const page = () => {
   return (
-    <div className='min-h-screen flex justify-center items-center'>
-      <h1>Users</h1>
+    <div className='flex justify-center items-center p-10'>
+      <Users />
     </div>
   )
 }
