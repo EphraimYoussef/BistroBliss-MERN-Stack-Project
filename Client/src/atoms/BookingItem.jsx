@@ -4,29 +4,29 @@ const BookingItem = ({ name, date, time , status , phone , email , totalPerson})
   return (
     <div className="flex justify-between items-center p-4 border rounded-lg">
       <div>
-        <h3 className="font-semibold">{name}</h3>
+        <h3 className="font-semibold text-primary">{name}</h3>
 				<div className="flex flex-col">
         	<p className="text-sm text-gray-500">
-						<span className="font-semibold">Date: </span>
-						{date}
-					</p>
-					<p className="text-sm text-gray-500">
-						<span className="font-semibold">Time: </span>
-						{time}
-					</p>
-					<p className="text-sm text-gray-500">
-						<span className="font-semibold">Total Person: </span>
-						{totalPerson} Person
-					</p>
-					<p className="text-sm text-gray-500">
-						<span className="font-semibold">Phone: </span>
-						{phone}
-					</p>
-					<p className="text-sm text-gray-500">
-						<span className="font-semibold">Email: </span>
-						{email}
-					</p>
-				</div>
+				<span className="font-semibold">Date: </span>
+				{date}
+			</p>
+			<p className="text-sm text-gray-500">
+				<span className="font-semibold">Time: </span>
+				{time}
+			</p>
+			<p className="text-sm text-gray-500">
+				<span className="font-semibold">Total Person: </span>
+				{totalPerson} Person
+			</p>
+			<p className="text-sm text-gray-500">
+				<span className="font-semibold">Phone: </span>
+				{phone}
+			</p>
+			<p className="text-sm text-gray-500">
+				<span className="font-semibold">Email: </span>
+				{email}
+			</p>
+		</div>
       </div>
       <div>
         <span
