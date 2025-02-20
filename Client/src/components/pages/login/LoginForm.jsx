@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')
@@ -53,6 +54,14 @@ export default function LoginForm() {
           >
             Login
           </Button>
+
+          <div className="flex items-center justify-center space-x-2 text-sm">
+            <p className='text-gray-500'>Don't have an account?</p>
+            <Link href='/register'
+            className="text-blue-500 hover:underline">
+              Register
+            </Link>
+          </div>
 
         </form>
       </div>
