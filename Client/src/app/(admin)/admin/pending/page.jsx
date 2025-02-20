@@ -1,9 +1,10 @@
+import PendingList from '@/components/pages/admin/PendingList'
 import React from 'react'
 
 const page = () => {
   return (
-    <div className='min-h-screen flex justify-center items-center bg-[#F9F9F7]'>
-      <h1>Pending</h1>
+    <div className='flex justify-center items-start px-5 pb-20 pt-5'>
+      <PendingList />
     </div>
   )
 }
