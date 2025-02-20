@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from "@/components/ui/checkbox"
+import Link from 'next/link'
 
 export default function LoginForm() {
   const [name, setName] = useState('')
@@ -101,6 +102,14 @@ export default function LoginForm() {
           >
             Register
           </Button>
+
+          <div className="flex items-center justify-center space-x-2 text-sm">
+            <p className="text-gray-500">Already have an account?</p>
+            <Link href='/login'
+            className="text-blue-500 hover:underline">
+              Login
+            </Link>
+          </div>
 
         </form>
       </div>
