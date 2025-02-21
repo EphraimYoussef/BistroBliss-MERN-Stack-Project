@@ -6,8 +6,6 @@ const authServices = require('../services/authServices');
 const signup = async (req, res,next) => {
 	try{
 			const error = validationResult(req)
-			console.log("heeyyy");
-			console.log(error);
 			
 			
 			if(!error.isEmpty())
