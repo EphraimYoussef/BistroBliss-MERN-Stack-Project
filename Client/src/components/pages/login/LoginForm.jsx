@@ -1,60 +1,135 @@
 "use client"
 
-import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Cookies from "js-cookie";
+import toast , { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input'
+
+const loginFormSchema = z.object({
+  email: z.string().email("Invalid email address."),
+  password: z.string().min(8, "Password must be at least 8 characters."),
+})
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const router = useRouter()
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle form submission here
-    console.log({ email , password})
-  }
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: {
+      errors , isSubmitting
+    } } = useForm({
+      resolver: zodResolver(loginFormSchema)
+    });
+
+  const onSubmit = async (data) => {
+    // console.log(data);
+    
+    try {
+      const response = await fetch("http://192.168.2.133:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const result = await response.json();
+
+
+      if (!response.ok) {
+        throw new Error(result.message || "Something went wrong. Please try again.");
+      }
+
+      Cookies.set("token", result.data.token.token);
+      const user = JSON.stringify(result.data.token.user)
+      Cookies.set("user", user);
+      toast.success("Login successful!");
+      setTimeout(() => {
+        router.push("/");
+      }, 2500);
+
+    } catch (error) {
+      setError("root", { message: error.message });
+      toast.error("Login failed!");
+    }
+  };    
 
   return (
     <div className='bg-[#F9F9F7] min-h-screen flex flex-col justify-around items-center p-6'>
+      <Toaster position='top-center' reverseOrder={false}/>
       <img src="Login.svg" alt="" className='p-5'/>
       <div className="w-full max-w-2xl mx-auto p-10 m-10 bg-white rounded-xl shadow-lg">
-        <form onSubmit={handleSubmit} className="space-y-3 flex flex-col gap-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 flex flex-col gap-3">
           
-          <div className="space-y-2">
+          {/* Email */}
+          <div className="space-y-1">
             <label htmlFor="name" className="block text-base font-medium text-gray-700">
               Email
             </label>
-            <input
+            <Input
               type="email"
               id="Email"
               placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              {...register("email")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:border-primary"
             />
+            <div className="h-1">{
+              errors.email 
+              && 
+              <span className="text-red-500 text-xs ml-3">
+                {errors.email.message}
+              </span>
+            }</div>
           </div>
-
-          <div className="space-y-2">
+          
+          {/* Password */}
+          <div className="space-y-1">
             <label htmlFor="name" className="block text-base font-medium text-gray-700">
               Password
             </label>
-            <input
+            <Input
               type="password"
               id="Password"
               placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              {...register("password")}
+              className="w-full px-4 py-2 border border-gray-300 rounded-full focus:border-primary"
             />
+            <div className="h-1">{
+              errors.password 
+              && 
+              <span className="text-red-500 text-xs ml-3">
+                {errors.password.message}
+              </span>
+            }</div>
           </div>
 
+          {/* Root Error */}
+          <div className="h-1 flex justify-center items-center">{
+              errors.root 
+              && 
+              <span className="text-red-500 text-xs ml-3">
+                {errors.root.message}
+              </span>
+          }</div>
+
+          {/* Login Button */}
           <Button
             type="submit"
             className="w-full px-4 py-3 font-semibold rounded-full text-white"
+            disabled={isSubmitting}
           >
-            Login
+            {isSubmitting ? "Logging in..." : "Login"}
           </Button>
 
+          {/* Register Link */}
           <div className="flex items-center justify-center space-x-2 text-sm">
             <p className='text-gray-500'>Don't have an account?</p>
             <Link href='/register'
