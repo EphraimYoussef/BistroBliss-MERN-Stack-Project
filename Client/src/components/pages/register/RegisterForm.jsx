@@ -7,9 +7,8 @@ import { Controller, useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod';
-import Cookies from "js-cookie";
 import toast , { Toaster } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
+import {signUp} from '@/services/userServices'
 
 const registerFormSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters."),
@@ -22,9 +21,7 @@ const registerFormSchema = z.object({
   path: ["confirmPassword"]
 });
 
-export default function LoginForm() {
-  const router = useRouter()
-
+export default function RegisterForm() {
   const { 
     register,
     handleSubmit, 
@@ -36,39 +33,16 @@ export default function LoginForm() {
       resolver: zodResolver(registerFormSchema)
     });
 
-  const onSubmit = async (data) => {
-    try {
-      const response = await fetch("http://192.168.2.133:5000/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: data.name,
-          email: data.email,
-          password: data.password,
-          isAdmin: data.admin,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || "Something went wrong. Please try again.");
-      }
-
-      // * Save token to a cookie (valid for 7 days)
-      Cookies.set("token", result.data.token, { expires: 7, secure: true });
-
-      toast.success("Registration successful!");
-
-      setTimeout(() => {
-        router.push("/login");
-      }, 2500);
-
-    } catch (error) {
-      setError("root", { message: error.message });
-      toast.error("Registration failed!");
-    }
-  };
+  const onSubmit = async(data) => {
+    toast.promise(signUp(data), {
+      loading: "Registering...",
+      success: "Registration successful!",
+      error: (err) => {
+        setError("root", { message: err.message });
+        return "Registration failed!";
+      },
+    }); 
+  }
 
   return (
     <div className='bg-[#F9F9F7] min-h-screen flex flex-col justify-around items-center p-6'>
