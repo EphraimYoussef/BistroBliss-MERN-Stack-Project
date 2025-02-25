@@ -5,10 +5,9 @@ import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Cookies from "js-cookie";
 import toast , { Toaster } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input'
+import { login } from '@/services/userServices'
 
 const loginFormSchema = z.object({
   email: z.string().email("Invalid email address."),
@@ -16,9 +15,7 @@ const loginFormSchema = z.object({
 })
 
 export default function LoginForm() {
-  const router = useRouter()
-
-  const {
+  const { 
     register,
     handleSubmit,
     setError,
@@ -26,41 +23,18 @@ export default function LoginForm() {
       errors , isSubmitting
     } } = useForm({
       resolver: zodResolver(loginFormSchema)
-    });
+  });
 
   const onSubmit = async (data) => {
-    // console.log(data);
-    
-    try {
-      const response = await fetch("http://192.168.2.133:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password,
-        }),
-      });
-
-      const result = await response.json();
-
-
-      if (!response.ok) {
-        throw new Error(result.message || "Something went wrong. Please try again.");
-      }
-
-      Cookies.set("token", result.data.token.token);
-      const user = JSON.stringify(result.data.token.user)
-      Cookies.set("user", user);
-      toast.success("Login successful!");
-      setTimeout(() => {
-        router.push("/");
-      }, 2500);
-
-    } catch (error) {
-      setError("root", { message: error.message });
-      toast.error("Login failed!");
-    }
-  };    
+    toast.promise(login(data), {
+      loading: "Logging in...",
+      success: "Login successful!",
+      error: (err) => {
+        setError("root", { message: err.message });
+        return "Login failed!";
+      },
+    }); 
+  }
 
   return (
     <div className='bg-[#F9F9F7] min-h-screen flex flex-col justify-around items-center p-6'>
