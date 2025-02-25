@@ -12,6 +12,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 export default function BookingForm() {
   const [date, setDate] = useState()
@@ -31,16 +32,19 @@ export default function BookingForm() {
       <img src="book/title.svg" alt="" className='p-5'/>
       <div className="w-full max-w-2xl mx-auto p-10 m-10 bg-white rounded-xl shadow-lg">
         <form  className="space-y-6">
+
+          {/* Date and Time */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Date */}
             <div className="space-y-2">
               <label htmlFor="date" className="block text-sm font-medium text-gray-700">
                 Date
               </label>
               <Popover>
-                <PopoverTrigger asChild>
+                <PopoverTrigger asChild >
                   <button
                     id="date"
-                    className={`w-full px-4 py-2 text-left border relative border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    className={`w-full px-4 py-2 text-left border relative border-gray-300 rounded-full ${
                       !date && "text-gray-400"
                     }`}
                   >
@@ -49,21 +53,23 @@ export default function BookingForm() {
                   </button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                  />
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  className="rounded-md border"
+                />
                 </PopoverContent>
               </Popover>
             </div>
+
+            {/* Time */}
             <div className="space-y-2">
               <label htmlFor="time" className="block text-sm font-medium text-gray-700">
                 Time
               </label>
               <div className="relative">
-                <input
+                <Input
                   type="time"
                   id="time"
                   value={time}
@@ -73,12 +79,14 @@ export default function BookingForm() {
               </div>
             </div>
           </div>
+
+          {/* Name and Phone*/}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                 Name
               </label>
-              <input
+              <Input
                 type="text"
                 id="name"
                 placeholder="Enter your name"
@@ -99,11 +107,13 @@ export default function BookingForm() {
                   value = {phone}
                   onChange = {(e) => setPhone(e.target.value)}
                   placeholder = "0123 456 7890"
-                  className = "w-full px-4 py-2 border border-gray-300 rounded-full "
+                  className = "w-full px-4 py-2 border border-gray-300 rounded-full"
                 />
               </div>
             </div>
           </div>
+
+          {/* Total Person */}
           <div className="space-y-2">
             <label htmlFor="totalPerson" className="block text-sm font-medium text-gray-700">
               Total Person
@@ -113,7 +123,7 @@ export default function BookingForm() {
                 id="totalPerson"
                 value={totalPerson}
                 onChange={(e) => setTotalPerson(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-full appearance-none"
               >
                 <option>1 Person</option>
                 <option>2 People</option>
@@ -124,12 +134,14 @@ export default function BookingForm() {
               <ChevronDownIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
             </div>
           </div>
+
           <Button
             type="submit"
             className="w-full px-4 py-3 font-semibold rounded-full text-white"
           >
             Book A Table
           </Button>
+
         </form>
       </div>
     </div>
