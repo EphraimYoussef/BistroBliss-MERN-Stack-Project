@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Phone, Mail, Menu, X, ChevronDown } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { Phone, Mail, Menu, X, ChevronDown, User, UserCircle, LogOut } from 'lucide-react'
 import { FaFacebookF, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa"
-
+import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import {
@@ -12,9 +12,53 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { getUsername, isTokenValid } from '@/lib/auth'
+import { useRouter } from 'next/navigation'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+import CustomAlertDialog from '@/atoms/CustomAlertDialog'
+
 
 export default function Navbar() {
+  const router = useRouter()
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [ token , setToken ] = useState(null);
+  const [dropDownTitle, setDropDownTitle] = useState('Login / Register');
+  const [ isOpenDialog , setIsOpenDialog ] = useState(false);
+
+  useEffect(() => {
+    setToken(Cookies.get('token'));
+    
+    if (token) {
+      const isValid = isTokenValid();
+      if (!isValid) {
+        Cookies.remove('token');
+        setToken(null);
+        setDropDownTitle('Login / Register');
+      } else {
+        const username = getUsername();
+        setDropDownTitle(username);
+      }
+    }
+  }, []);
+  
+  const handleBookTable = () => {
+    if(token){
+      router.push('/book')
+    }
+    else{
+      setIsOpenDialog(true);
+    }
+  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -59,40 +103,93 @@ export default function Navbar() {
             <Link href="/about" className="text-gray-600 hover:text-gray-800">About us</Link>
             <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
             <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact us</Link>
-            <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300">
+            <button onClick={handleBookTable} 
+            className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300">
               Book A Table
             </button>
+            
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="flex items-center">
-                  Login / Register <ChevronDown className="ml-2 h-4 w-4" />
+                  {
+                    dropDownTitle === 'Login / Register' ? 
+                    <span className="text-gray-600">Login / Register</span> :
+                    <span className="text-gray-600 flex items-center gap-2">
+                      {dropDownTitle}
+                    </span>
+                  }
+                  <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <Link href="/login" className="w-full">Login</Link>
+                <DropdownMenuItem className = "border-b rounded-none border-gray-200">
+                  {
+                    dropDownTitle === 'Login / Register' ? 
+                    <Link href="/login" className="w-full flex justify-center items-center
+                    font-semibold text-gray-600">Login</Link> :
+                    <Link href="/profile" className="w-full flex justify-center items-center gap-2
+                    font-semibold text-gray-600">
+                      <UserCircle className="h-5 w-5" />
+                      Profile
+                    </Link>
+                  }
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="/register" className="w-full">Register</Link>
+                  {
+                    dropDownTitle === 'Login / Register' ? 
+                    <Link href="/register" className="w-full flex justify-center items-center
+                    font-semibold text-gray-600">Register</Link> :
+                    <button className="w-full flex justify-center items-center gap-2
+                    font-semibold text-gray-600">
+                      <LogOut className="h-4 w-4" />
+                      Logout
+                    </button>
+                  }
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center space-x-4">
-            <DropdownMenu>
+          <div className="lg:hidden flex items-center space-x-1">
+          <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="flex items-center">
-                  Login / Register <ChevronDown className="ml-2 h-4 w-4" />
+                <Button variant="outline" className="flex items-center">
+                  {
+                    dropDownTitle === 'Login / Register' ? 
+                    <span className="text-gray-600">Login / Register</span> :
+                    <span className="text-gray-600 flex items-center gap-2">
+                      {dropDownTitle}
+                    </span>
+                  }
+                  <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <Link href="/login" className="w-full">Login</Link>
+                <DropdownMenuItem className = "border-b rounded-none border-gray-200">
+                  {
+                    dropDownTitle === 'Login / Register' ? 
+                    <Link href="/login" className="w-full flex justify-center items-center
+                    font-semibold text-gray-600">Login</Link> :
+                    <Link href="/profile" className="w-full flex justify-center items-center gap-2
+                    font-semibold text-gray-600">
+                      <UserCircle className="h-5 w-5" />
+                      Profile
+                    </Link>
+                  }
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="/register" className="w-full">Register</Link>
+                  {
+                    dropDownTitle === 'Login / Register' ? 
+                    <Link href="/register" className="w-full flex justify-center items-center
+                    font-semibold text-gray-600">Register</Link> :
+                    <button className="w-full flex justify-center items-center gap-2
+                    font-semibold text-gray-600">
+                      <LogOut className="h-4 w-4" />
+                      Logout
+                    </button>
+                  }
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -114,14 +211,25 @@ export default function Navbar() {
             <Link href="/about" className="text-gray-600 hover:text-gray-800">About us</Link>
             <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
             <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact us</Link>
-            <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300 w-full">
+            <button onClick={handleBookTable} 
+            className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300 w-full">
               Book A Table
             </button>
           </div>
         </div>
 
       </div>
-
+      
+      <CustomAlertDialog 
+        message="You need to be logged in to book a table. Please sign in first."
+        title="Login Required"
+        confirmButtonTitle="Login"
+        setIsOpen={setIsOpenDialog} 
+        isOpen={isOpenDialog}
+        onConfirm={() => {
+          router.push("/login")
+        }
+      }/>
     </>
   )
 }
