@@ -2,7 +2,7 @@ class WrongEmailOrPassword extends Error {
   constructor() {
     super();
     this.name = 'WronhEmailOrPassword';
-    this.message = 'Wrong email or password.';
+    this.message = 'Invalid email or password.';
     this.status = 401;
   }
 }
