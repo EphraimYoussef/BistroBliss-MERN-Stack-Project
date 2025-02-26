@@ -23,3 +23,21 @@ html{ scroll-behavior: smooth; }
     @apply border-border outline-ring/50; }
   body {
     @apply bg-background text-foreground; } }
+
+
+
+.activeUserNavDesktop {
+  @apply bg-primary text-white rounded-full duration-300 ease-in-out hover:bg-primary-dark; 
+}
+
+.activeUserNavPhone {
+  @apply text-primary font-semibold duration-300 ease-in-out hover:text-primary-dark
+}
+
+.activeBookButtonNav{
+  @apply bg-gray-400 text-white rounded-full duration-300 ease-in-out hover:bg-gray-500; 
+}
+
+.activeButtonStyle{
+  @apply active:scale-95 transition duration-300;
+}

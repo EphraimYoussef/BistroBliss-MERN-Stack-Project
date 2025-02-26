@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Phone, Mail, Menu, X, ChevronDown, User, UserCircle, LogOut } from 'lucide-react'
+import { Phone, Mail, Menu, X, ChevronDown, UserCircle, LogOut } from 'lucide-react'
 import { FaFacebookF, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa"
 import Cookies from 'js-cookie'
 import Link from 'next/link'
@@ -14,22 +14,12 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { getUsername, isTokenValid } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
 import CustomAlertDialog from '@/atoms/CustomAlertDialog'
+import '../../app/globals.css'
 
 
-export default function Navbar() {
+export default function Navbar({ pathname }) {
   const router = useRouter()
-
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [ token , setToken ] = useState(null);
   const [dropDownTitle, setDropDownTitle] = useState('Login / Register');
@@ -51,7 +41,7 @@ export default function Navbar() {
     }
   }, []);
   
-  const handleBookTable = () => {
+  const handleBookButton = () => {
     if(token){
       router.push('/book')
     }
@@ -98,15 +88,26 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop menu */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
-            <Link href="/about" className="text-gray-600 hover:text-gray-800">About us</Link>
-            <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
-            <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact us</Link>
-            <button onClick={handleBookTable} 
-            className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300">
-              Book A Table
+          <div className="hidden lg:flex items-center space-x-5">
+            <Link href="/" className={`text-gray-600 px-3 py-1
+            ${ pathname === '/' ? 'activeUserNavDesktop' : 'hover:text-gray-800'} `}>Home</Link>
+            <Link href="/about" className={`text-gray-600 px-3 py-1
+            ${ pathname === '/about' ? 'activeUserNavDesktop ' : 'hover:text-gray-800'} `}>About us</Link>
+            <Link href="/menu" className={`text-gray-600 px-3 py-1
+            ${ pathname === '/menu' ? 'activeUserNavDesktop' : 'hover:text-gray-800'} `}>Menu</Link>
+            <Link href="/contact" className={`text-gray-600 px-3 py-1
+            ${ pathname === '/contact' ? 'activeUserNavDesktop ' : 'hover:text-gray-800'} `}>Contact us</Link>
+            <button
+                onClick={handleBookButton}
+                className = {`bg-gray-200 text-gray-800 px-4 py-2 rounded-full 
+                  ${
+                    pathname === '/book' ? 'activeBookButtonNav' : 'hover:bg-gray-300'
+                  }
+                active:bg-gray-400 active:scale-95 transition duration-300`}
+              >
+                Book A Table
             </button>
+
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -207,13 +208,23 @@ export default function Navbar() {
           }`}
         >
           <div className="flex flex-col space-y-4 px-6 py-4">
-            <Link href="/" className="text-gray-600 hover:text-gray-800">Home</Link>
-            <Link href="/about" className="text-gray-600 hover:text-gray-800">About us</Link>
-            <Link href="/menu" className="text-gray-600 hover:text-gray-800">Menu</Link>
-            <Link href="/contact" className="text-gray-600 hover:text-gray-800">Contact us</Link>
-            <button onClick={handleBookTable} 
-            className="bg-gray-200 text-gray-800 px-4 py-2 rounded-full hover:bg-gray-300 transition duration-300 w-full">
-              Book A Table
+            <Link href="/" className={`text-gray-600
+            ${ pathname === '/' ? 'activeUserNavPhone ' : 'hover:text-gray-800'} `}>Home</Link>
+            <Link href="/about" className={`text-gray-600
+            ${ pathname === '/about' ? 'activeUserNavPhone ' : 'hover:text-gray-800'} `}>About us</Link>
+            <Link href="/menu" className={`text-gray-600
+            ${ pathname === '/menu' ? 'activeUserNavPhone ' : 'hover:text-gray-800'} `}>Menu</Link>
+            <Link href="/contact" className={`text-gray-600
+            ${ pathname === '/contact' ? 'activeUserNavPhone ' : 'hover:text-gray-800'} `}>Contact us</Link>
+            <button
+                onClick={handleBookButton}
+                className = {`bg-gray-200 text-gray-800 px-4 py-2 rounded-full 
+                  ${
+                    pathname === '/book' ? 'activeBookButtonNav' : 'hover:bg-gray-300'
+                  }
+                active:bg-gray-400 active:scale-95 transition duration-300`}
+              >
+                Book A Table
             </button>
           </div>
         </div>
