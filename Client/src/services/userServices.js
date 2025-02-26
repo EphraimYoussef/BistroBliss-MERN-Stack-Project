@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const signUp = async (data) => {
   try {
-    const response = await fetch("http://192.168.2.133:5000/api/auth/signup", {
+    const response = await fetch("http://localhost:5000/api/auth/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -32,7 +32,7 @@ const signUp = async (data) => {
 
 const login = async (data) => {
   try {
-    const response = await fetch("http://192.168.2.133:5000/api/auth/login", {
+    const response = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -58,7 +58,21 @@ const login = async (data) => {
   }
 }
 
+const logout = async () => {
+  try {
+    await fetch('http://localhost:5000/api/auth/logout', { method: 'POST', credentials: 'include' });
+    setTimeout(() => {
+      window.location.reload();
+    }, 2500);
+  } 
+  catch (error) {
+    console.error('Logout failed', error);
+  }
+};
+
+
 export {
   signUp,
-  login
+  login,
+  logout
 }
