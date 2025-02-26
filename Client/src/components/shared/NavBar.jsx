@@ -15,7 +15,9 @@ import {
 import { getUsername, isTokenValid } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
 import CustomAlertDialog from '@/atoms/CustomAlertDialog'
+import toast , { Toaster } from 'react-hot-toast';
 import '../../app/globals.css'
+import { logout } from '@/services/userServices'
 
 
 export default function Navbar({ pathname }) {
@@ -51,12 +53,27 @@ export default function Navbar({ pathname }) {
     }
   }
 
+
+const handleLogout = () =>{
+    toast.promise(
+    logout(),
+    {
+      loading: 'Logging out...',
+      success: 'Logged out successfully',
+      error: 'An error occurred. Please try again.',
+    }
+  )
+}
+
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
+
       {/* Top bar - not sticky */}
       <div className="bg-[#474747] text-white py-2 px-4">
         <div className='container mx-auto flex flex-col sm:flex-row justify-between items-center'>
@@ -141,8 +158,9 @@ export default function Navbar({ pathname }) {
                     dropDownTitle === 'Login / Register' ? 
                     <Link href="/register" className="w-full flex justify-center items-center
                     font-semibold text-gray-600">Register</Link> :
-                    <button className="w-full flex justify-center items-center gap-2
-                    font-semibold text-gray-600">
+                    <button onClick={handleLogout}
+                      className="w-full flex justify-center items-center gap-2
+                      font-semibold text-gray-600">
                       <LogOut className="h-4 w-4" />
                       Logout
                     </button>
@@ -186,8 +204,9 @@ export default function Navbar({ pathname }) {
                     dropDownTitle === 'Login / Register' ? 
                     <Link href="/register" className="w-full flex justify-center items-center
                     font-semibold text-gray-600">Register</Link> :
-                    <button className="w-full flex justify-center items-center gap-2
-                    font-semibold text-gray-600">
+                    <button onClick={handleLogout}
+                      className="w-full flex justify-center items-center gap-2
+                      font-semibold text-gray-600">
                       <LogOut className="h-4 w-4" />
                       Logout
                     </button>
