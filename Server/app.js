@@ -12,17 +12,19 @@ const { NotFound } = require('./errors/CustomErrors');
 
 const app = express();
 
-// Connect to Database
+// ? Connect to Database
 connectDB();
 
-// Middleware
-app.use(cors()); // Allow cross-origin requests
-app.use(express.json()); // Parse incoming JSON requests
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}));
+app.use(express.json());
 
-// Routes
+// ? Routes
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/menu', mealRouter);
+app.use('/api/meals', mealRouter);
 app.use('/api/bookings', bookingRouter);
 
 app.all('*', (req, res, next) => {
@@ -30,7 +32,7 @@ app.all('*', (req, res, next) => {
     next(err);
 });
 
-// Error Handler
+// ? Error Handler
 app.use((err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.message = err.message || 'Internal Server Error';
@@ -41,7 +43,7 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Start Server
+// ? Start Server
 const port = config.port || 5000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
