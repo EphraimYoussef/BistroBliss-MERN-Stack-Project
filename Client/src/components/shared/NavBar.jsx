@@ -21,18 +21,19 @@ import '../../app/globals.css'
 export default function Navbar({ pathname }) {
   const router = useRouter()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [ token , setToken ] = useState(null);
+  const [ userToken , setUserToken ] = useState(null);
   const [dropDownTitle, setDropDownTitle] = useState('Login / Register');
   const [ isOpenDialog , setIsOpenDialog ] = useState(false);
 
   useEffect(() => {
-    setToken(Cookies.get('token'));
+    const userToken = Cookies.get('token');
+    setUserToken(userToken);
     
-    if (token) {
+    if (userToken) {
       const isValid = isTokenValid();
       if (!isValid) {
         Cookies.remove('token');
-        setToken(null);
+        setUserToken(null);
         setDropDownTitle('Login / Register');
       } else {
         const username = getUsername();
@@ -42,7 +43,7 @@ export default function Navbar({ pathname }) {
   }, []);
   
   const handleBookButton = () => {
-    if(token){
+    if(userToken){
       router.push('/book')
     }
     else{
