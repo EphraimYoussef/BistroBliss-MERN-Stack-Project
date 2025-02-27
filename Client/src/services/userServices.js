@@ -1,9 +1,12 @@
 import Cookies from "js-cookie";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const signUp = async (data) => {
   try {
-    const response = await fetch("http://localhost:5000/api/auth/signup", {
+    console.log("env" + process.env.BACKEND_PORT);
+    
+    const response = await fetch(`${API_URL}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -32,7 +35,7 @@ const signUp = async (data) => {
 
 const login = async (data) => {
   try {
-    const response = await fetch("http://localhost:5000/api/auth/login", {
+    const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -60,7 +63,7 @@ const login = async (data) => {
 
 const logout = async () => {
   try {
-    await fetch('http://localhost:5000/api/auth/logout', { method: 'POST', credentials: 'include' });
+    await fetch(`${API_URL}/auth/logout`, { method: 'POST', credentials: 'include' });
     setTimeout(() => {
       window.location.reload();
     }, 2500);
