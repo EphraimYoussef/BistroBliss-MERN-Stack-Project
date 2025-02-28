@@ -4,7 +4,7 @@ const jsend = require('jsend');
 
 const getUser = async (req, res) => {
     try{
-        const user = await userServices.getUser(req.user._id);
+        const user = await userServices.getUser(req.user.id);
         res.json(jsend.success({user}));
     }catch(err){
         res.status(500).json(jsend.error({message: err.message}));
@@ -22,8 +22,9 @@ const getUsers = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try{
-        const user = await userServices.updateUser(req.user._id, req.body);
-        res.json(jsend.success({user}));
+        const { updatedUser, token } = await userServices.updateUser(req.user.id, req.body);
+        res.cookie("token", token, { httpOnly: true });
+        res.json(jsend.success({ token , user: updatedUser }));
     }catch(err){
         res.status(500).json(jsend.error({message: err.message}));
     }
