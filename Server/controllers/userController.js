@@ -31,7 +31,7 @@ const updateUser = async (req, res) => {
 
 const getBookings = async (req, res) => {
     try{
-        const bookings = await userServices.getBookings(req.user._id);
+        const bookings = await userServices.getBookings(req.user.id);
         res.json(jsend.success({bookings}));
     }catch(err){
         res.status(500).json(jsend.error({message: err.message}));
