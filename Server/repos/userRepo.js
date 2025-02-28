@@ -17,13 +17,17 @@ const findUserByEmail = async (email) => {
 	}
 }
 
-const updateUser = async (id, user) => {
+const updateUser = async (id, updatedUser) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(id, user, {new: true});
-        if (!updatedUser) {
+        const user = await User.findById(id);
+        if(!user) {
             throw new Error('User not found');
         }
-        return updatedUser;
+        user.username = updatedUser.username;
+        user.email = updatedUser.email;
+        user.password = updatedUser.password;
+        await user.save();
+        return user;
     } catch(err) {
         throw new Error(err.message);
     }
