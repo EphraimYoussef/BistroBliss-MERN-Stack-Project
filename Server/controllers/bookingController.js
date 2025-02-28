@@ -5,7 +5,7 @@ const jsend = require("jsend");
 const createBooking = async (req, res) => {
     try {
         const booking = req.body;
-        booking.userId = req.user._id;
+        booking.userId = req.user.id;
         const newBooking = await bookingServices.createBooking(booking);
         res.json(jsend.success({ newBooking }));
     } catch (err) {
