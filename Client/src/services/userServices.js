@@ -1,3 +1,4 @@
+import { isTokenValid } from "@/lib/auth";
 import Cookies from "js-cookie";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -73,9 +74,75 @@ const logout = async () => {
   }
 };
 
+const getProfile = async () => {
+  if (!isTokenValid()) {
+    await logout();
+    window.location.href = '/';
+    return null;
+  }
+  try {
+    const response = await fetch(`${API_URL}/users/profile`, { 
+      credentials: 'include',
+      headers: { 
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${Cookies.get('token')}`
+      } 
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    return result;
+  } 
+  catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const updateProfile = async (data) => {
+  if (!isTokenValid()) {
+    await logout();
+    window.location.href = '/';
+    return null;
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/users/profile`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${Cookies.get('token')}`
+      },
+      body: JSON.stringify({
+        username: data.username,
+        email: data.email,
+        password: data.password
+      })
+    });
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.message || 'Something went wrong. Please try again.');
+    } 
+
+    Cookies.set("token", result.data.token, { expires: 7, secure: true });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 2500);
+
+  }
+  catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 export {
   signUp,
   login,
-  logout
+  logout,
+  getProfile,
+  updateProfile
 }
