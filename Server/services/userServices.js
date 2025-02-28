@@ -92,7 +92,14 @@ const getUsers = async () => {
 const updateUser = async (id, user) => {
 	try {
 			const updatedUser = await userRepo.updateUser(id, user);
-			return updatedUser;
+			const token = jwt.sign({
+					id: updatedUser._id,
+					isAdmin: updatedUser.isAdmin,
+					email: updatedUser.email, 
+					username: updatedUser.username
+			}, config.jwt.secret, { expiresIn: config.jwt.expiration });
+		
+			return {updatedUser, token};
 	} catch (error) {
 			throw new Error(error.message);
 	}
