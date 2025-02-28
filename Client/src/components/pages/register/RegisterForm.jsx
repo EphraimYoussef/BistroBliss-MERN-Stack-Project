@@ -9,6 +9,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast , { Toaster } from 'react-hot-toast';
 import {signUp} from '@/services/userServices'
+import "../../../app/globals.css"
 
 const registerFormSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters."),
@@ -172,7 +173,7 @@ export default function RegisterForm() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full px-4 py-3 font-semibold rounded-full text-white"
+            className="w-full px-4 py-3 font-semibold rounded-full text-white activeButtonStyle"
           >
             {isSubmitting ? "Registering..." : "Register"}
           </Button>
