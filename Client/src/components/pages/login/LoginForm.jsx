@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import toast , { Toaster } from 'react-hot-toast';
 import { Input } from '@/components/ui/input'
 import { login } from '@/services/userServices'
+import "../../../app/globals.css"
 
 const loginFormSchema = z.object({
   email: z.string().email("Invalid email address."),
@@ -97,7 +98,7 @@ export default function LoginForm() {
           {/* Login Button */}
           <Button
             type="submit"
-            className="w-full px-4 py-3 font-semibold rounded-full text-white"
+            className="w-full px-4 py-3 font-semibold rounded-full text-white activeButtonStyle"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Logging in..." : "Login"}
