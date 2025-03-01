@@ -1,6 +1,7 @@
 import { isTokenValid } from "@/lib/auth";
 import Cookies from "js-cookie";
 import { logout } from "./userServices";
+import { format } from "date-fns";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -21,7 +22,7 @@ const createBooking = async (bookingData) => {
       body: JSON.stringify({
         name: bookingData.name,
         phone: bookingData.phone,
-        date: bookingData.date,
+        date: format(new Date(bookingData.date), "yyyy-MM-dd"),
         time: bookingData.time,
         capacity: bookingData.totalPerson
       })
@@ -37,6 +38,35 @@ const createBooking = async (bookingData) => {
   }
 }
 
+const getUserBookings = async () => {
+  if (!isTokenValid()) {
+    await logout();
+    window.location.href = '/';
+    return null;
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/users/bookings`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${Cookies.get('token')}`
+      }
+    });
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.message || 'Something went wrong. Please try again.');
+    }
+
+    return await result.data.bookings;
+
+  } catch (error) {
+    throw new Error(`Could not get user bookings: ${error.message}`);
+  }
+}
+
 export{
-  createBooking
+  createBooking,
+  getUserBookings
 }
