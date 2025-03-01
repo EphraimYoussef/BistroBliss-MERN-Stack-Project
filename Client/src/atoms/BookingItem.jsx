@@ -22,10 +22,6 @@ const BookingItem = ({ name, date, time , status , phone , email , totalPerson})
 				<span className="font-semibold">Phone: </span>
 				{phone}
 			</p>
-			<p className="text-sm text-gray-500">
-				<span className="font-semibold">Email: </span>
-				{email}
-			</p>
 		</div>
       </div>
       <div>
