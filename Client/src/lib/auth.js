@@ -1,8 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
 
-const getIsAdmin = () => {
-  const token = Cookies.get("token");
+const getIsAdmin = (token) => {
   if (!token) {
     return false;
   }
