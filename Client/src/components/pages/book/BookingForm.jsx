@@ -83,7 +83,7 @@ export default function BookingForm() {
         success: "Table booked successfully!",
         error: (error) => {
           setError("root", { message: error.message });
-          return "Something went wrong! Please try again.";
+          return "Something went wrong!\n Please try again.";
         },
       }
     )
@@ -232,7 +232,7 @@ export default function BookingForm() {
                 <option value={"2"}>2 People</option>
                 <option value={"3"}>3 People</option>
                 <option value={"4"}>4 People</option>
-                <option value={"5+"}>5+ People</option>
+                <option value={"+5"}>+5 People</option>
               </select>
               <ChevronDownIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
             </div>
