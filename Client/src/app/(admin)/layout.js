@@ -1,6 +1,6 @@
 'use client'
 import * as React from 'react'
-import { Users } from 'lucide-react'
+import { Users , CircleUser , LogOut } from 'lucide-react'
 import { IoFastFoodOutline } from "react-icons/io5";
 import { MdPendingActions } from "react-icons/md";
 import {
@@ -14,6 +14,11 @@ import {
 } from '@/components/ui/sidebar'
 import BottomBar from '@/components/pages/admin/BottomBar'
 import { Playfair_Display } from 'next/font/google'
+import toast, { Toaster } from 'react-hot-toast';
+import { logout } from '@/services/userServices';
+import { usePathname } from "next/navigation";
+import "../../app/globals.css"
+import Link from 'next/link';
 
 const playFairDisplay_Font = Playfair_Display({
   subsets: ['latin'] ,
@@ -24,11 +29,26 @@ const menuItems = [
   { icon: Users, label: 'Users', href: '/admin/users' },
   { icon: IoFastFoodOutline, label: 'Meals', href: '/admin/meals' },
   { icon: MdPendingActions, label: 'Pending Bookings', href: '/admin/pending' },
+  { icon: CircleUser, label: 'Profile', href: '/admin/profile' },
 ]
 
 export default function AdminLayout({ children }) {
+  const pathname = usePathname();
+
+  const handleLogout = () => {
+    toast.promise(
+      logout(),
+      {
+        loading: 'Logging out...',
+        success: 'Logged out successfully',
+        error: 'An error occurred. Please try again.',
+      }
+    )
+  }
+
   return (
     <SidebarProvider>
+      <Toaster position='top-center' reverseOrder={false}/>
 
       <div className="flex min-h-screen w-full">
 
@@ -51,15 +71,29 @@ export default function AdminLayout({ children }) {
               {
                 menuItems.map((item) => (
                   <SidebarMenuItem key={item.label}>
-                    <SidebarMenuButton asChild className="h-12">
-                      <a href={item.href} className="text-lg flex items-center font-semibold">
+                    <SidebarMenuButton asChild className={`h-12
+                      ${pathname === item.href ?
+                      'activeAdminSidebar hover:bg-primary/10 hover:text-primary-dark active:text-primary active:bg-primary/10' 
+                      : ''}`}>
+                      <Link href={item.href} 
+                        className={`text-lg flex items-center font-semibold active:scale-95`}>
                         <item.icon className="h-10 w-10 mr-2" />
                         <span>{item.label}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))
               }
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild className="h-12">
+                  <button 
+                    onClick={handleLogout}
+                    className="text-lg flex items-center font-semibold active:scale-95">
+                    <LogOut className="h-10 w-10 mr-2" />
+                    <span>Logout</span>
+                  </button>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarContent>
 
