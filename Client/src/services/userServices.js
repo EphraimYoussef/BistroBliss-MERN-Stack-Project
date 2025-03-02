@@ -89,11 +89,11 @@ const getProfile = async () => {
       } 
     });
 
+    const result = await response.json();
     if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
+      throw new Error(result.message || 'Something went wrong. Please try again.');
     }
 
-    const result = await response.json();
     return result;
   } 
   catch (error) {
@@ -139,10 +139,35 @@ const updateProfile = async (data) => {
   }
 };
 
+const getAllUsers = async () => {
+  if (!isTokenValid()) {
+    await logout();
+    window.location.href = '/';
+    return null;
+  }
+  try {
+    const response = await fetch(`${API_URL}/users`, {
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${Cookies.get('token')}`
+      }
+    });
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.message || 'Something went wrong. Please try again.');
+    }
+    return result.data.users;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 export {
   signUp,
   login,
   logout,
   getProfile,
-  updateProfile
+  updateProfile,
+  getAllUsers
 }
