@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BookingItem = ({ name, date, time , status , phone , email , totalPerson}) => {
+const BookingItem = ({ name, date, time , status , phone , totalPerson}) => {
   return (
     <div className="flex justify-between items-center p-4 border rounded-lg">
       <div>
@@ -27,9 +27,9 @@ const BookingItem = ({ name, date, time , status , phone , email , totalPerson})
       <div>
         <span
           className={`px-2 py-1 rounded-full text-xs ${
-            status === "Accepted" ? "bg-green-100 text-green-800" 
+            status === "accepted" ? "bg-green-100 text-green-800" 
 						:
-						status === "Rejected" ? "bg-red-100 text-red-800" 
+						status === "rejected" ? "bg-red-100 text-red-800" 
 						:
 						"bg-yellow-100 text-yellow-800"
           }`}
