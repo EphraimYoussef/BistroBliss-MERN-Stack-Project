@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Playfair_Display } from "next/font/google"
+import { getAllUsers } from "@/services/userServices"
 
 
 const playFairDisplay_Font = Playfair_Display({
@@ -13,18 +14,20 @@ export default function Users() {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    // ? Fetch users from API
-    // ! This is a mock implementation
-    setUsers([
-      { id: 1, name: "John Doe", email: "john@example.com" , isAdmin: true},
-      { id: 2, name: "Jane Smith", email: "jane@example.com" , isAdmin: false},
-    ])
+    const fetchUsers = async () => {
+      const data = await getAllUsers();
+      if (data) {
+        setUsers(data);
+      }
+    }
+
+    fetchUsers();
   }, [])
 
   return (
     <div className="bg-white shadow overflow-hidden rounded-lg w-full">
       <div className="px-4 py-5 sm:px-6 bg-[#F9F9F7]">
-        <h3 className="text-lg leading-6 font-medium text-gray-900 font-semibold">
+        <h3 className="text-lg leading-6 text-gray-900 font-bold">
           <span className={playFairDisplay_Font.className} >Users</span>
         </h3>
       </div>
@@ -32,10 +35,10 @@ export default function Users() {
         <ul className="divide-y divide-gray-200">
           {
             users.map((user) => (
-              <li key={user.id} className="px-4 py-4 sm:px-6">
+              <li key={user._id} className="px-4 py-4 sm:px-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-primary truncate">{user.name}</p>
+                    <p className="text-sm font-medium text-primary truncate">{user.username}</p>
                     <p className="text-sm text-gray-500 font-semibold">
                       {user.email}
                     </p>
