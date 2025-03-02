@@ -41,3 +41,11 @@ html{ scroll-behavior: smooth; }
 .activeButtonStyle{
   @apply active:scale-95 transition duration-300;
 }
+
+.activeAdminSidebar{
+  @apply text-primary border-r-[3px] border-primary rounded-none bg-primary/5 duration-200; 
+}
+
+.activeAdminBottombar{
+  @apply text-primary border-t-[3px] border-t-primary rounded-none bg-primary/5 duration-200;
+}
