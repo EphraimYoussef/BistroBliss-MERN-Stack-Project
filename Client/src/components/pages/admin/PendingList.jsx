@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { Playfair_Display } from "next/font/google"
 import PendingItem from "@/atoms/PendingITem"
+import { getPendingBookings } from "@/services/bookingServices"
+import { format, parse } from "date-fns"
 
 const playFairDisplay_Font = Playfair_Display({ 
   subsets: ["latin"],
@@ -12,12 +14,14 @@ const PendingList = () => {
   const [bookings, setBookings] = useState([])
 
   useEffect(() => {
-    // ? Fetch bookings from API
-    // ! This is a mock implementation
-    setBookings([
-      { id: 1, name: "John Doe", date: "2023-06-01", time: "19:00", status: "pending" , phone: "+201551220618", email: "evra@gmail.com", totalPerson: "5+"},
-      { id: 2, name: "Jane Smith", date: "2023-06-02", time: "20:00", status: "accepted" , phone: "+201551220618", email: "evra@gmail.com", totalPerson: "5+"},
-    ])
+    const fetchBookings = async () => {
+      const data = await getPendingBookings();
+      if (data) {
+        setBookings(data);
+      }
+    }
+
+    fetchBookings();
   }, [])
 
   return (
@@ -31,8 +35,15 @@ const PendingList = () => {
       <div className="border-t border-gray-200">
         <ul className=" flex flex-col gap-5 py-5" >
           {bookings.map((booking) => (
-            <li key={booking.id} className="px-4  sm:px-6">
-              <PendingItem name={booking.name} date={booking.date} time={booking.time} status={booking.status} phone={booking.phone} email={booking.email} totalPerson={booking.totalPerson} />
+            <li key={booking._id} className="px-4  sm:px-6">
+              <PendingItem 
+                key={booking._id} 
+                bookingId={booking._id}
+                name={booking.name} 
+                date={format(new Date(booking.date), "PPP")} 
+                time={format(parse(booking.time, "HH:mm", new Date()), "hh:mm a")} 
+                status={booking.status} phone={booking.phone} 
+                totalPerson={booking.capacity} />
             </li>
           ))}
         </ul>
