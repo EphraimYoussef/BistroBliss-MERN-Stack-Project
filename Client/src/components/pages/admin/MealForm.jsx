@@ -1,7 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import React from 'react'
+import React, { useState } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form'
@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import "../../../app/globals.css"
 import toast from 'react-hot-toast'
 import { addMeal } from '@/services/mealsServices'
+import CustomAlertDialog from '@/atoms/CustomAlertDialog'
 
 const mealFormSchema = z.object({
   name: z.string()
@@ -37,6 +38,10 @@ const mealFormSchema = z.object({
 
 
 const MealForm = () => {
+  const [open, setOpen] = useState(false);
+  const [mealData, setMealData] = useState({});
+
+
   const {
     register,
     handleSubmit,
@@ -46,9 +51,10 @@ const MealForm = () => {
     resolver: zodResolver(mealFormSchema)
   });
 
-  const onSubmit = (data) => {
+
+  const onConfirm = async () => {
     toast.promise(
-      addMeal(data),
+      addMeal(mealData),
       {
         loading: "Adding meal...",
         success: "Meal added successfully!",
@@ -58,6 +64,11 @@ const MealForm = () => {
         }
       }
     )
+  }
+
+  const onSubmit = (data) => {
+    setOpen(true)
+    setMealData(data)
   }
 
   return (
@@ -178,6 +189,14 @@ const MealForm = () => {
           </Button>
 
         </form>
+
+        <CustomAlertDialog 
+        isOpen={open} 
+        setIsOpen={setOpen} 
+        onConfirm={onConfirm} 
+        message="Are you sure you want to add this meal?" 
+        title="Add New Meal" 
+        confirmButtonTitle="Add" />
 
       </div>
   )
