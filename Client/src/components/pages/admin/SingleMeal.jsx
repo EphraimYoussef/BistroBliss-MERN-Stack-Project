@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import toast from 'react-hot-toast'
 import { deleteMeal, updateMeal } from '@/services/mealsServices'
 import CustomAlertDialog from '@/atoms/CustomAlertDialog'
+import "../../../app/globals.css"
 
 const SingleMealSchema = z.object({
   name: z.string()
@@ -197,13 +198,14 @@ const SingleMeal = ( { item } ) => {
         </div>
 
         <div className="flex gap-3 px-5 max-lg:justify-center max-lg:items-center">
-          <Button className="mt-2 px-5 py-2 text-xs font-semibold rounded-lg text-primary bg-[#F9F9F7] hover:text-primary-dark" 
+          <Button className="mt-2 px-5 py-2 text-xs font-semibold rounded-lg 
+            text-primary bg-[#F9F9F7] hover:text-primary-dark activeButtonStyle" 
             type="submit"
             disabled={isSubmitting}
             variant="outline">
             {isSubmitting ? "Updating..." : "Update"}
           </Button>
-          <Button className="mt-2 px-5 py-2 text-xs font-semibold rounded-lg"
+          <Button className="mt-2 px-5 py-2 text-xs font-semibold rounded-lg activeButtonStyle"
             onClick = {handleDeleteButton}
             type="button"
             variant="destructive">
