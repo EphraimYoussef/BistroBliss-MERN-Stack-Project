@@ -32,4 +32,12 @@ const updateMeal = async (id, meal) => {
     }
 }
 
-module.exports = { getAllMeals, getMealsByCategory ,createMeal, updateMeal}
+const deleteMeal = async (id) => {
+    try{
+        return await mealRepo.deleteMeal(id);
+    }catch(err){
+        throw new Error(err.message);
+    }
+}
+
+module.exports = { getAllMeals, getMealsByCategory ,createMeal, updateMeal , deleteMeal}
