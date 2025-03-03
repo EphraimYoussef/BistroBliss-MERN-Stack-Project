@@ -1,95 +1,184 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import React, { useState } from 'react'
-const defaultImage = "https://thispersondoesnotexist.com/"
+import React from 'react'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form'
+import { Input } from '@/components/ui/input'
+import "../../../app/globals.css"
+import toast from 'react-hot-toast'
+import { addMeal } from '@/services/mealsServices'
+
+const mealFormSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(3, "Name must be at least 3 characters.")
+    .max(100, "Name must be at most 100 characters."),
+
+  description: z.string()
+    .trim()
+    .min(3, "Description must be at least 3 characters.")
+    .max(500, "Description must be at most 500 characters."),
+
+  price: z.number()
+    .positive("Price must be a positive number.")
+    .min(0.01, "Price must be at least 1 £E .")
+    .max(5000, "Price must be at most 5000 £E ."),
+
+  image: z.string()
+    .trim()
+    .url("Image must be a valid URL."),
+
+  category: z.enum(["Breakfast", "Drinks", "Main Dishes", "Desserts"], {
+    errorMap: () => ({ message: "Please select a category." }),
+  })
+});
+
 
 const MealForm = () => {
-  const [menuItems, setMenuItems] = useState([])
-      const [newItem, setNewItem] = useState({
-        name: "",
-        description: "",
-        price: 0,
-        image: defaultImage,
-        category: "Breakfast",
-      })
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors , isSubmitting },
+  } = useForm({
+    resolver: zodResolver(mealFormSchema)
+  });
 
-  const handleAddItem = () => {
-    const id = String(Math.max(0, ...menuItems.map((item) => Number.parseInt(item.id))) + 1)
-    setMenuItems([...menuItems, { id, ...newItem }])
-    setNewItem({ name: "", description: "", price: 0, image: defaultImage, category: "Breakfast" })
+  const onSubmit = (data) => {
+    toast.promise(
+      addMeal(data),
+      {
+        loading: "Adding meal...",
+        success: "Meal added successfully!",
+        error: (error) => {
+          setError("root", { message: error.message });
+          return "Something went wrong!\nPlease try again.";
+        }
+      }
+    )
   }
 
   return (
     <div className="px-4 py-4 sm:px-6 border-t border-gray-200">
         <h4 className="text-lg leading-6 font-medium text-gray-900">Add New Meal</h4>
-        <div className="mt-2 grid grid-cols-1 gap-y-5 ">
-          <div className="flex flex-col gap-2">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-2 grid grid-cols-1 gap-y-6 ">
+
+          {/* Name */}
+          <div className="flex flex-col gap-1">
             <Label className="text-sm text-gray-500" htmlFor="name">Name</Label>
-          <input
-            type="text"
-            placeholder="Name"
-            value={newItem.name}
-            onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-            className="px-2 py-1 border rounded w-full"
-          />
+            <Input
+              type="text"
+              placeholder="Name"
+              {...register("name")}
+              className="px-2 py-1 border rounded w-full"
+            />
+            <div className="h-1">
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
           </div>
-          
-          <div className="flex flex-col gap-2">
+
+          {/* Description */}
+          <div className="flex flex-col gap-1">
             <Label className="text-sm text-gray-500" htmlFor="description">Description</Label>
             <textarea
               type="text"
               placeholder="Description"
-              value={newItem.description}
-              onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
+              {...register("description")}
               className="px-2 py-1 border rounded w-full"
             />
+            <div className="h-1">
+              {errors.description && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.description.message}
+                </p>
+              )}
+            </div>
           </div>
 
-          <div className="flex flex-col gap-2">
+          {/* Price */}
+          <div className="flex flex-col gap-1">
             <Label className="text-sm text-gray-500" htmlFor="price">Price</Label>
-            <input
+            <Input
               type="number"
               placeholder="Price"
-              value={newItem.price}
-              onChange={(e) => setNewItem({ ...newItem, price: Number.parseFloat(e.target.value) })}
+              {...register("price" , { valueAsNumber: true })}
               className="px-2 py-1 border rounded w-full"
             />
+            <div className="h-1">
+              {errors.price && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.price.message}
+                </p>
+              )}
+            </div>
           </div>
 
-          <div className="flex flex-col gap-2">
+          {/* Image URL */}
+          <div className="flex flex-col gap-1">
             <Label className="text-sm text-gray-500" htmlFor="image">Image URL</Label>
-            <input
+            <Input
               type="text"
               placeholder="Image URL"
-              value={newItem.image}
-              onChange={(e) => setNewItem({ ...newItem, image: e.target.value })}
+              {...register("image")}
               className="px-2 py-1 border rounded w-full"
             />
+            <div className="h-1">
+              {errors.image && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.image.message}
+                </p>
+              )}
+            </div>
           </div>
-          
-          <div className="flex flex-col gap-2">
+
+          {/* Category */}
+          <div className="flex flex-col gap-1">
             <Label className="text-sm text-gray-500" htmlFor="category">Category</Label>
             <select
-              value={newItem.category}
-              onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
               className="px-2 py-1 border rounded w-full"
+              {...register("category", { required: "Category is required." })}
+              defaultValue={"Select a category"}
             >
+              <option disabled value="Select a category" >Select a category</option> {/* Placeholder */}
               <option value="Breakfast">Breakfast</option>
               <option value="Drinks">Drinks</option>
               <option value="Main Dishes">Main Dishes</option>
               <option value="Desserts">Desserts</option>
             </select>
+            <div className="h-1">
+              {errors.category && (
+                <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>
+              )}
+            </div>
           </div>
-          
+
+          {/* Root Error */}
+          <div className="flex justify-center items-center">
+            {
+              errors.root && (
+                <p className="text-red-500 text-xs mt-1">{errors.root.message}</p>
+              )
+            }
+          </div>
+
+          {/* Add button */}
           <Button
-            onClick={handleAddItem}
-            className="px-2 py-1 mt-2 text-sm font-semibold rounded-full w-full text-white"
+            type="submit"
+            disabled={isSubmitting}
+            className="px-2 py-1 text-sm font-semibold rounded-full w-full text-white activeButtonStyle"
           >
-            Add Meal
+            {isSubmitting ? "Adding..." : "Add Meal"}
           </Button>
-          
-        </div>
+
+        </form>
+
       </div>
   )
 }
