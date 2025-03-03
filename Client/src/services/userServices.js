@@ -5,8 +5,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const signUp = async (data) => {
   try {
-    console.log("env" + process.env.BACKEND_PORT);
-    
     const response = await fetch(`${API_URL}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

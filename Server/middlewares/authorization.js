@@ -12,8 +12,6 @@ const authorizeAdmin = (req, res, next) => {
     
     try {
         const decoded = jwt.verify(token, config.jwt.secret); // Verify token
-        console.log(decoded.isAdmin);
-        console.log(decoded);
         
         if(decoded.isAdmin === false){
             return res.status(403).json({ message: 'Forbidden: User is not admin' });
