@@ -4,7 +4,7 @@ import { Playfair_Display } from "next/font/google"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import Link from "next/link"
-
+import "../../../app/globals.css"
 
 const playFairDisplay_Font = Playfair_Display({ 
   subsets: ['latin'] ,
@@ -28,7 +28,7 @@ const Meals = () => {
       
       <Button 
         variant="default" 
-        className="fixed bottom-5 right-5 z-50 shadow-lg text-white p-3"
+        className="fixed bottom-5 right-5 z-50 shadow-lg text-white p-3 activeButtonStyle"
         title="Add Meal"
         > 
         <Link href={"#AddMeal"}>

@@ -201,6 +201,7 @@ const SingleMeal = ( { item } ) => {
           <Button className="mt-2 px-5 py-2 text-xs font-semibold rounded-lg 
             text-primary bg-[#F9F9F7] hover:text-primary-dark activeButtonStyle" 
             type="submit"
+            title="Update this Meal"
             disabled={isSubmitting}
             variant="outline">
             {isSubmitting ? "Updating..." : "Update"}
@@ -208,6 +209,7 @@ const SingleMeal = ( { item } ) => {
           <Button className="mt-2 px-5 py-2 text-xs font-semibold rounded-lg activeButtonStyle"
             onClick = {handleDeleteButton}
             type="button"
+            title="Delete this Meal"
             variant="destructive">
             Delete
           </Button>

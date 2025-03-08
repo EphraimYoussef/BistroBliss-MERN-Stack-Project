@@ -39,6 +39,7 @@ const  BottomBar = () => {
             <Button
               variant="ghost"
               size="sm"
+              title={item.label}
               className={`flex flex-col items-center gap-1 h-auto py-3 active:scale-95 rounded-none
               ${pathname === item.href ? "activeAdminBottombar hover:bg-primary/10 hover:text-primary-dark active:text-primary active:bg-primary/10" 
                 : "hover:bg-gray-200 hover:text-gray-900 border-t"}`}
@@ -58,6 +59,7 @@ const  BottomBar = () => {
             onClick={handleLogout}
             variant="ghost"
             size="sm"
+            title="Logout"
             className="flex flex-col items-center gap-1 h-auto py-3 active:scale-95 w-full
             hover:bg-gray-200 hover:text-gray-900 rounded-none "
           >

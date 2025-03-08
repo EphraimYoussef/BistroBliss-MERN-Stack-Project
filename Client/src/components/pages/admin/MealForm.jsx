@@ -183,6 +183,7 @@ const MealForm = ({id}) => {
           <Button
             type="submit"
             disabled={isSubmitting}
+            title="Add New Meal"
             className="px-2 py-1 text-sm font-semibold rounded-full w-full text-white activeButtonStyle"
           >
             {isSubmitting ? "Adding..." : "Add Meal"}

@@ -71,7 +71,7 @@ export default function AdminLayout({ children }) {
               {
                 menuItems.map((item) => (
                   <SidebarMenuItem key={item.label}>
-                    <SidebarMenuButton asChild className={`h-12
+                    <SidebarMenuButton asChild title={item.label} className={`h-12
                       ${pathname === item.href ?
                       'activeAdminSidebar hover:bg-primary/10 hover:text-primary-dark active:text-primary active:bg-primary/10' 
                       : ''}`}>
@@ -87,6 +87,7 @@ export default function AdminLayout({ children }) {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="h-12">
                   <button 
+                    title="Logout"
                     onClick={handleLogout}
                     className="text-lg flex items-center font-semibold active:scale-95">
                     <LogOut className="h-10 w-10 mr-2" />
