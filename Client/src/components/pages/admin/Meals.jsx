@@ -1,6 +1,9 @@
 import MealsList from "./MealsList"
 import MealForm from "./MealForm"
 import { Playfair_Display } from "next/font/google"
+import { Button } from "@/components/ui/button"
+import { Plus } from "lucide-react"
+import Link from "next/link"
 
 
 const playFairDisplay_Font = Playfair_Display({ 
@@ -20,8 +23,18 @@ const Meals = () => {
 
       <MealsList />
 
-      <MealForm />
+      <MealForm id={"AddMeal"}/>
       
+      <Button 
+        variant="default" 
+        className="fixed bottom-5 right-5 z-50 shadow-lg text-white p-3"
+        title="Add Meal"
+        > 
+        <Link href={"#AddMeal"}>
+          <Plus className="h-7 w-7" />
+        </Link>
+      </Button>
+
     </div>
   )
 }
