@@ -9,6 +9,7 @@ import Link from "next/link"
 const playFairDisplay_Font = Playfair_Display({ 
   subsets: ['latin'] ,
   style: 'italic',
+  weight: '700'
 })
 const Meals = () => {
 
