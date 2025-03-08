@@ -37,7 +37,7 @@ const mealFormSchema = z.object({
 });
 
 
-const MealForm = () => {
+const MealForm = ({id}) => {
   const [open, setOpen] = useState(false);
   const [mealData, setMealData] = useState({});
 
@@ -72,7 +72,7 @@ const MealForm = () => {
   }
 
   return (
-    <div className="px-4 py-4 sm:px-6 border-t border-gray-200">
+    <div id={id} className="px-4 py-4 sm:px-6 border-t border-gray-200">
         <h4 className="text-lg leading-6 font-medium text-gray-900">Add New Meal</h4>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-2 grid grid-cols-1 gap-y-6 ">
