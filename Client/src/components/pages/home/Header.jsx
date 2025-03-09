@@ -43,10 +43,11 @@ const Header = () => {
 						className="rounded-full w-44 sm:w-40 h-14 text-white text-base hover:bg-primary-dark activeButtonStyle">
 						Book A Table
 					</Button>
-					<Button variant="outline" className="rounded-full w-44 sm:w-40 h-14 text-base activeButtonStyle">
-						<Link href="/menu">
-							Explore Menu
-						</Link>
+					<Button variant="outline" 
+						className="rounded-full w-44 sm:w-40 h-14 text-base activeButtonStyle"
+						onClick={() => router.push('/menu')}
+						>
+						Explore Menu
 					</Button>
 				</div>
 			</div>

@@ -3,8 +3,10 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
 import "@/app/globals.css"
+import { useRouter } from 'next/navigation';
 
 const EmptyMenu = () => {
+  const router = useRouter();
   return (
     <div className="flex flex-col items-center justify-center text-center h-96 m-10 w-1/2 
       max-md:w-4/5 p-8 space-y-6 border rounded-3xl bg-[#F9F9F7] shadow-md">
@@ -20,10 +22,9 @@ const EmptyMenu = () => {
         </p>
       </div>
 
-      <Button className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg activeButtonStyle ">
-        <Link href={"/"} >
-          Back to Home
-        </Link>
+      <Button onClick={() => router.push('/')} 
+        className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg activeButtonStyle ">
+        Back to Home
       </Button>
     </div>
   );

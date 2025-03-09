@@ -1,10 +1,11 @@
+"use client"
 import MealsList from "./MealsList"
 import MealForm from "./MealForm"
 import { Playfair_Display } from "next/font/google"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
-import Link from "next/link"
 import "../../../app/globals.css"
+import { useRouter } from "next/navigation"
 
 const playFairDisplay_Font = Playfair_Display({ 
   subsets: ['latin'] ,
@@ -12,6 +13,7 @@ const playFairDisplay_Font = Playfair_Display({
   weight: '700'
 })
 const Meals = () => {
+  const router = useRouter();
 
   return (
     <div className="bg-white shadow overflow-hidden rounded-lg w-full">
@@ -28,12 +30,11 @@ const Meals = () => {
       
       <Button 
         variant="default" 
+        onClick={() => router.push("/admin/meals#AddMeal")}
         className="fixed bottom-5 right-5 z-50 shadow-lg text-white p-3 activeButtonStyle"
         title="Add Meal"
         > 
-        <Link href={"#AddMeal"}>
           <Plus className="h-7 w-7" />
-        </Link>
       </Button>
 
     </div>

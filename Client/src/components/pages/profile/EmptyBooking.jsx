@@ -1,9 +1,10 @@
 import { CalendarX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import "@/app/globals.css";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const EmptyBooking = () => {
+  const router = useRouter();
 
   return (
     <div className="flex flex-col h-96 items-center justify-center text-center w-full 
@@ -18,10 +19,9 @@ const EmptyBooking = () => {
         </p>
       </div>
 
-      <Button className="bg-primary text-white px-6 py-3 rounded-full activeButtonStyle">
-        <Link href="/book">
-          Book a Table
-        </Link>
+      <Button onClick={() => router.push("/book")}
+        className="bg-primary text-white px-6 py-3 rounded-full activeButtonStyle">
+        Book a Table
       </Button>
     </div>
   );
