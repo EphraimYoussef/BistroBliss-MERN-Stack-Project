@@ -130,9 +130,31 @@ const deleteMeal = async (id) => {
   }
 }
 
+const getMealsByCategory = async (category) => {
+  try {
+    const response = await fetch(`${API_URL}/meals/${category}`, {
+      method: 'GET',
+      headers:{
+        'Content-Type': 'application/json',
+      }
+    })
+
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.message || 'Something went wrong. Please try again.');
+    }
+
+    return await result.data.meals;
+  } 
+  catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 export { 
   addMeal,
   getMeals,
   updateMeal,
-  deleteMeal
+  deleteMeal,
+  getMealsByCategory
 };
