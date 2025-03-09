@@ -6,21 +6,25 @@ const cardsData = [
 		title: "Breakfast",
 		img:"/breakfast.svg",
 		description: "In the new era of technology we look in the future with certainty and pride for our life.",
+		link : "/menu?category=Breakfast"
 	},
 	{
 		title: "Main Dishes",
 		img:"/maindishes.svg",
 		description: "In the new era of technology we look in the future with certainty and pride for our life.",
+		link : "/menu?category=Main+Dishes"
 	},
 	{
 		title: "Drinks",
 		img:"/drinks.svg",
 		description: "In the new era of technology we look in the future with certainty and pride for our life.",
+		link : "/menu?category=Drinks"
 	},
 	{
 		title: "Desserts",
 		img:"/desserts.svg",
 		description: "In the new era of technology we look in the future with certainty and pride for our life.",
+		link : "/menu?category=Desserts"
 	},
 ]
 
