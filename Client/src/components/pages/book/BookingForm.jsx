@@ -18,6 +18,7 @@ import { Controller, useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { createBooking } from '@/services/bookingServices';
 import "../../../app/globals.css"
+import CustomAlertDialog from '@/atoms/CustomAlertDialog';
 
 const bookingFormSchema = z.object({
   date: z
@@ -74,10 +75,12 @@ export default function BookingForm() {
   });
 
   const [date, setDate] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [bookingData, setBookingData] = useState([]);
 
-  const onSubmit = (data) => {
+  const onConfirm = () => {
     toast.promise(
-      createBooking(data),
+      createBooking(bookingData),
       {
         loading: "Booking a table...",
         success: "Table booked successfully!",
@@ -89,6 +92,10 @@ export default function BookingForm() {
     )
   }
 
+  const onSubmit = (data) => {
+    setBookingData({ ...data, date });
+    setOpen(true)
+  }
 
   return (
     <div className='bg-[#F9F9F7] min-h-screen flex flex-col justify-around items-center p-6'>
@@ -265,6 +272,14 @@ export default function BookingForm() {
 
         </form>
       </div>
+      <CustomAlertDialog
+        isOpen={open}
+        setIsOpen={setOpen}
+        onConfirm={onConfirm}
+        message={"Are you sure you want to book this table?"}
+        title={"Book A Table"}
+        confirmButtonTitle={"Book"}
+      />
     </div>
 
   )
